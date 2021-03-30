@@ -9,5 +9,7 @@ namespace Test81b.Models
     {
         public int Codigo { get; set; }
         public string Nombre { get; set; }
+
+        public IEnumerable<Usuario> Usuarios { get; set; }
     }
 }

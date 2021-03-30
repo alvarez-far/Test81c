@@ -13,6 +13,7 @@ namespace Test81b.Models
         public string Genero { get; set; }
         public string Cedula { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public int IdDepartamento { get; set; }
         public Departamento Departamento { get; set; }
         public string Cargo { get; set; }
         public string SupervisorInmediato { get; set; }

@@ -31,7 +31,7 @@ namespace Test81b.Controllers
                 db.Add(user);
                 db.SaveChanges();
             }
-            catch
+            catch (Exception e)
             {
                 // I'll think about a more meaningful error later
                 return StatusCode(500);

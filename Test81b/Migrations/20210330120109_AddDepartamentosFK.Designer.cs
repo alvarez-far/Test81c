@@ -10,8 +10,8 @@ using Test81b.DAL;
 namespace Test81b.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    [Migration("20210330025948_init")]
-    partial class init
+    [Migration("20210330120109_AddDepartamentosFK")]
+    partial class AddDepartamentosFK
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,7 @@ namespace Test81b.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellidos")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cargo")
@@ -69,16 +70,18 @@ namespace Test81b.Migrations
                     b.Property<string>("Cedula")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DepartamentoCodigo")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Genero")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdDepartamento")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombres")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SupervisorInmediato")
@@ -86,7 +89,7 @@ namespace Test81b.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartamentoCodigo");
+                    b.HasIndex("IdDepartamento");
 
                     b.ToTable("Usuarios");
                 });
@@ -94,10 +97,17 @@ namespace Test81b.Migrations
             modelBuilder.Entity("Test81b.Models.Usuario", b =>
                 {
                     b.HasOne("Test81b.Models.Departamento", "Departamento")
-                        .WithMany()
-                        .HasForeignKey("DepartamentoCodigo");
+                        .WithMany("Usuarios")
+                        .HasForeignKey("IdDepartamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Departamento");
+                });
+
+            modelBuilder.Entity("Test81b.Models.Departamento", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test81b.DAL;
 
 namespace Test81b.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    partial class DefaultContextModelSnapshot : ModelSnapshot
+    [Migration("20210330104806_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +61,6 @@ namespace Test81b.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellidos")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cargo")
@@ -68,18 +69,16 @@ namespace Test81b.Migrations
                     b.Property<string>("Cedula")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DepartamentoCodigo")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Genero")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdDepartamento")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombres")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SupervisorInmediato")
@@ -87,7 +86,7 @@ namespace Test81b.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdDepartamento");
+                    b.HasIndex("DepartamentoCodigo");
 
                     b.ToTable("Usuarios");
                 });
@@ -95,17 +94,10 @@ namespace Test81b.Migrations
             modelBuilder.Entity("Test81b.Models.Usuario", b =>
                 {
                     b.HasOne("Test81b.Models.Departamento", "Departamento")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("IdDepartamento")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("DepartamentoCodigo");
 
                     b.Navigation("Departamento");
-                });
-
-            modelBuilder.Entity("Test81b.Models.Departamento", b =>
-                {
-                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

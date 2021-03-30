@@ -30,6 +30,22 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\cedula.pipe.ts" />
+    <None Remove="ClientApp\src\app\models\viewModels.ts" />
+    <None Remove="ClientApp\src\app\nav-menu2\nav-menu2.component.ts" />
+    <None Remove="ClientApp\src\app\user\create\user-create.component.ts" />
+    <None Remove="ClientApp\src\app\user\read\user-read.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\cedula.pipe.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\viewModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\nav-menu2\nav-menu2.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\user\create\user-create.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\user\read\user-read.component.ts" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

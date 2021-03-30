@@ -1,0 +1,11 @@
+.userForm {
+  max-width: 500px;
+  min-width: 200px;
+  width: 100%;
+  margin:0 auto;
+}
+
+
+.fullWidth {
+  width: 100%;
+}

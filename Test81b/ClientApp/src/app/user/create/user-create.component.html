@@ -1,0 +1,83 @@
+<h2>Crear Usuario</h2>
+
+<form class="userForm" #userForm="ngForm">
+  <mat-form-field class="fullWidth">
+    <mat-label>Nombre</mat-label>
+    <input matInput
+           type="text"
+           required
+           [(ngModel)]="newUser.nombres"
+           name="nombres" />
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Apellidos</mat-label>
+    <input matInput type="text"
+           required
+           [(ngModel)]="newUser.apellidos"
+           name="apellidos" />
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Genero</mat-label>
+    <mat-select [errorStateMatcher]="mandatoryMatcher"
+                required
+                [(ngModel)]="newUser.genero"
+                name="genero">
+      <mat-option *ngFor="let gender of genders" [value]="gender.valor">
+        {{gender.nombre}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="mandatorySelect.hasError('required')">
+      Debe seleccionar un genero.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Cedula</mat-label>
+    <input matInput [errorStateMatcher]="mandatoryMatcher"
+           type="text"
+           mask="000-0000000-0"
+           required
+           [(ngModel)]="newUser.cedula"
+           name="cedula" />
+    <mat-error *ngIf="mandatorySelect.hasError('required')">
+      Cedula es <strong>requerida</strong>.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Fecha de Nacimiento</mat-label>
+    <input matInput type="date"
+           required
+           [(ngModel)]="newUser.fechaNacimiento"
+           name="fechaNacimiento" />
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Departamento</mat-label>
+    <mat-select required
+                [(ngModel)]="newUser.departamento.codigo"
+                name="departamento">
+      <mat-option *ngFor="let department of departments" [value]="department.codigo">
+        {{department.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Cargo</mat-label>
+    <input matInput type="text"
+           [(ngModel)]="newUser.cargo"
+           name="cargo" />
+  </mat-form-field>
+
+  <mat-form-field class="fullWidth">
+    <mat-label>Supervisor Inmediato</mat-label>
+    <input matInput type="text"
+           [(ngModel)]="newUser.supervisorInmediato"
+           name="supervisorInmediato" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="createUser(userForm.form.valid)">Crear</button>
+</form>

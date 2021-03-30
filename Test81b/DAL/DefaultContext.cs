@@ -26,6 +26,7 @@ namespace Test81b.DAL
             modelBuilder.Entity<Departamento>(entity => {
                 //entity.ToTable("stockCombustible", "gasStock");
                 entity.HasKey(e => e.Codigo);
+                entity.Property(e => e.Codigo).ValueGeneratedOnAdd();
                 entity.Property(e => e.Nombre);
             });
 
@@ -36,15 +37,22 @@ namespace Test81b.DAL
                 );
 
             modelBuilder.Entity<Usuario>(entity => {
-                entity.Property(e => e.Id);
-                entity.Property(e => e.Nombres);
-                entity.Property(e => e.Apellidos);
-                entity.Property(e => e.Genero);
+
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Nombres).IsRequired();
+                entity.Property(e => e.Apellidos).IsRequired();
+                entity.Property(e => e.Genero).IsRequired();
                 entity.Property(e => e.Cedula);
-                entity.Property(e => e.FechaNacimiento);
-                entity.HasOne(e => e.Departamento);
+                entity.Property(e => e.FechaNacimiento).IsRequired();
                 entity.Property(e => e.Cargo);
                 entity.Property(e => e.SupervisorInmediato);
+
+                entity.HasOne(e => e.Departamento)
+                    .WithMany(e => e.Usuarios)
+                    .HasForeignKey(e => e.IdDepartamento);
+
             });
 
         }

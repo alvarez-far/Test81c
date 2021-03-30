@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+
+.userForm {
+  max-width: 500px;
+  min-width: 200px;
+  width: 100%;
+}
+
+
+.fullWidth {
+  width: 100%;
+}

@@ -1,0 +1,7 @@
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar.navbar-expand.navbar-dark.bg-dark {
+  background-color: #0066cc !important;
+}
