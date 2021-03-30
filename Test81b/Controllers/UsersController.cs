@@ -44,7 +44,9 @@ namespace Test81b.Controllers
         [HttpGet]
         public IEnumerable<Usuario> getUsers()
         {
-            return db.Usuarios.ToArray();
+            return db.Usuarios
+                .Include(x => x.Departamento)
+                .ToArray();
         }
 
         //UPDATE
